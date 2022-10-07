@@ -46,7 +46,7 @@ public class HomeController {
 
     @GetMapping("/dataTable")
     public String getDataTable() {
-        return "datatable";
+        return "datatable ";
     }
 
 }
