@@ -1,0 +1,136 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/layout.html::dynamic(~{::body})}">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+
+</head>
+<body>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<div class="container mt-5">
+<table id="tableSwapi" class="table table-info">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Full name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Message</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+</table>
+    <button class="btn-info"><a href="http://localhost:8080/contacts/download">Download file</a> </button>
+    <button class="btn-info"><a href="http://localhost:8080/contacts/downloadTwoFiles">Download List Information</a> </button>
+</div>
+
+<!--<script th:src="@{/js/query.spring-friendly.js}" defer></script>-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<script>
+    // From https://github.com/jquery/jquery/blob/master/src/serialize.js
+    // Overrides data serialization to allow Spring MVC to correctly map input parameters : column[0][data] now becomes column[0].data
+    (function($) {
+        var r20 = /%20/g, rbracket = /\[\]$/, rCRLF = /\r?\n/g, rsubmitterTypes = /^(?:submit|button|image|reset|file)$/i, rsubmittable = /^(?:input|select|textarea|keygen)/i;
+
+        function customBuildParams(prefix, obj, traditional, add) {
+            var name;
+
+            if (jQuery.isArray(obj)) {
+                // Serialize array item.
+                jQuery.each(obj, function(i, v) {
+                    if (traditional || rbracket.test(prefix)) {
+                        // Treat each array item as a scalar.
+                        add(prefix, v);
+
+                    } else {
+                        // Item is non-scalar (array or object), encode its numeric
+                        // index.
+                        customBuildParams(prefix + "["
+                            + (typeof v === "object" ? i : "") + "]", v,
+                            traditional, add);
+                    }
+                });
+
+            } else if (!traditional && jQuery.type(obj) === "object") {
+                // Serialize object item.
+                for (name in obj) {
+                    // This is where the magic happens
+                    customBuildParams(prefix + "." + name, obj[name], traditional,
+                        add);
+                }
+
+            } else {
+                // Serialize scalar item.
+                add(prefix, obj);
+            }
+        }
+
+        $.param = function(a, traditional) {
+            var prefix, s = [], add = function(key, value) {
+                // If value is a function, invoke it and return its value
+                value = jQuery.isFunction(value) ? value() : (value == null ? ""
+                    : value);
+                s[s.length] = encodeURIComponent(key) + "="
+                    + encodeURIComponent(value);
+            };
+
+            // Set traditional to true for jQuery <= 1.3.2 behavior.
+            if (traditional === undefined) {
+                traditional = jQuery.ajaxSettings
+                    && jQuery.ajaxSettings.traditional;
+            }
+
+            // If an array was passed in, assume that it is an array of form
+            // elements.
+            if (jQuery.isArray(a) || (a.jquery && !jQuery.isPlainObject(a))) {
+                // Serialize the form elements
+                jQuery.each(a, function() {
+                    add(this.name, this.value);
+                });
+
+            } else {
+                // If traditional, encode the "old" way (the way 1.3.2 or older
+                // did it), otherwise encode params recursively.
+                for (prefix in a) {
+                    customBuildParams(prefix, a[prefix], traditional, add);
+                }
+            }
+
+            // Return the resulting serialization
+            return s.join("&").replace(r20, "+");
+        };
+    })(jQuery);
+    $('table#tableSwapi').DataTable({
+        ajax: 'http://localhost:8080/table/contacts',
+        serverSide: true,
+        columns: [
+            {
+                data: 'id'
+            },
+            {
+                data: 'fullName'
+            },
+            {
+                data: 'email'
+            },
+            {
+                data: 'phone',
+            },
+            {
+                data: 'message'
+            },
+            {
+                data: 'date'
+            }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

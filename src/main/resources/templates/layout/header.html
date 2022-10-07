@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd" id="navbar-example1" >
+        <div class="container-fluid ">
+            <a class="navbar-brand" th:href="@{/home/home}">
+                <img
+                        src="https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/d2a05331078417497a241ac6f2cd26d5.png"
+                        class="me-2"
+                        height="20"
+                        alt="MDB Logo"
+                        loading="lazy"
+                />
+                <small>AEGONA</small>
+            </a>
+            <div class="collapse navbar-collapse  " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" th:href="@{/home/home}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home/contact}">Contact</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home/dashboard}">Dashboard</a>
+                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="@{/home/listContact}">List Contact</a>-->
+<!--                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home/UserManagement}">User Management</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home/dataTable}">List Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+
+            <a class="btn btn-info m-2" id="helloName"></a>
+            <a class="btn btn-primary m-2" th:href="@{/home/login}">Login</a>
+            <a class="btn btn-primary m-2" onclick="logout()">Logout</a>
+            <a class="btn btn-primary m-2" th:href="@{/home/Register}">Register</a>
+        </div>
+        </div>
+        <!-- Collapsible wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <script>
+        document.getElementById("helloName").innerText = "Hello: "+ localStorage.getItem("username");
+        function logout() {
+            $.ajax({
+                url: "http://localhost:8080/account/logout",
+                type: "Get",
+                contentType: "application/json;",
+                dataType: 'json',
+                success: function(data) {
+                    if(data.success === true) {
+                        localStorage.clear();
+                        document.location.href = 'http://localhost:8080/home/home';
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    alert("Chưa đăng nhập");
+                    console.log(jqXHR, exception);
+                },
+            })
+        }
+    </script>
+</header>
+</body>
+</html>

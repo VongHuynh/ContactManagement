@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact us</title>
+</head>
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+<!-- MDB -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet" />
+<!--jquery lib-->
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js}"></script>
+<body class="bg-light">
+<div class="container" >
+    <div class="row d-flex align-items-center" style="height: 900px;">
+        <!--Section: Contact v.2-->
+        <section class="mb-4 border-0 bg-white p-5 shadow-lg p-3 mb-5 bg-white rounded ">
+
+            <!--Section heading-->
+            <h1 class="h1-responsive font-weight-bold text-center my-4 text-danger" >Contact us</h1>
+            <!--Section description-->
+            <p class="text-center w-responsive mx-auto mb-5 lead">Do you have any questions? </p>
+
+            <div class="row ">
+
+                <!--Grid column-->
+                <div class="col-md-7 mb-md-0 mb-5 p-3  shadow-1-strong rounded-5">
+                    <form id="contact-form" name="contact-form">
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-3">
+                                <div class="md-form mb-0">
+                                    <label class="">Full name</label>
+                                    <input type="text" id="fullname" name="fullname" class="form-control">
+                                    <span class="text-danger" id="fullname_error"></span>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                            <!--Grid column-->
+                            <div class="col-md-6 mb-3">
+                                <div class="md-form mb-0 ">
+                                    <label for="phone" class="">Your phone</label>
+                                    <input type="text" id="phone" name="phone" class="form-control">
+                                    <span class="text-danger" id="phone_error"></span>
+                                </div>
+                            </div>
+                            <!--Grid column-->
+
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <div class="md-form mb-0">
+                                    <label for="email" class="">Email</label>
+                                    <input type="email" id="email" class="form-control">
+                                    <span class="text-danger" id="email_error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                        <!--Grid row-->
+                        <div class="row">
+
+                            <!--Grid column-->
+                            <div class="col-md-12">
+
+                                <div class="md-form">
+                                    <label for="message">Your message</label>
+                                    <textarea type="text" id="message" name="message" rows="5"
+                                              class="form-control md-textarea"></textarea>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--Grid row-->
+
+                    </form>
+
+                    <div class="text-md-left mt-3">
+                        <button type="submit" class="btn btn-primary" onclick="sendContact()">Send message</button>
+                    </div>
+                    <div class="status"></div>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-5 text-center p-3 rounded-5 d-flex align-items-center justify-content-center" style="background-color: #f7cac9;">
+                    <ul class="list-unstyled mb-0">
+                        <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                            <p>QTSC 9, Q.12, TP.HCM</p>
+                        </li>
+
+                        <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                            <p>+ 01 234 567 89</p>
+                        </li>
+
+                        <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                            <p>contact@gmail.com</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid column-->
+
+            </div>
+
+        </section>
+        <!--Section: Contact v.2-->
+    </div>
+
+</div>
+<script th:src="@{/js/ContactUs.js}" defer></script>
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+</body>
+
+</html>
